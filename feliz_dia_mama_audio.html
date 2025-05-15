@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz día Mamá</title>
+  <style>
+    body {
+      background: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 1s ease;
+      text-align: center;
+    }
+
+    .heart-button {
+      background-color: #ff4d6d;
+      border: none;
+      color: white;
+      font-size: 7vw;
+      padding: 5vw;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      z-index: 2;
+    }
+
+    .heart-button:hover {
+      transform: scale(1.1);
+    }
+
+    .message, .second-message, .third-message {
+      margin-top: 2vw;
+      font-size: 4.5vw;
+      display: none;
+      z-index: 2;
+    }
+
+    .message {
+      color: #d6336c;
+    }
+
+    .second-message {
+      color: #8c1c3f;
+      font-style: italic;
+    }
+
+    .third-message {
+      color: #a01338;
+    }
+
+    .background-rosado {
+      background-color: #ffcce1;
+    }
+
+    .corazon {
+      position: absolute;
+      font-size: 6vw;
+      animation: flotar 4s ease-out forwards;
+      pointer-events: none;
+      color: #ff4d6d;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="heart-button">❤️</button>
+
+  <div class="message" id="mensaje1">Feliz día, mamá. Te amamos mucho, con cariño Ayelen, Kevin y Enrique.</div>
+  <div class="second-message" id="mensaje2">Gracias por todo lo que haces por nosotros cada día.</div>
+  <div class="third-message" id="mensaje3">Eres la mejor.</div>
+
+  <audio id="musica" src="turip_audio.mp3"></audio>
+
+  <script>
+    const boton = document.querySelector('.heart-button');
+    const mensaje1 = document.getElementById('mensaje1');
+    const mensaje2 = document.getElementById('mensaje2');
+    const mensaje3 = document.getElementById('mensaje3');
+    const body = document.body;
+    const musica = document.getElementById('musica');
+
+    boton.addEventListener('click', () => {
+      mensaje1.style.display = 'block';
+      body.classList.add('background-rosado');
+      musica.play();
+
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => crearCorazon(), i * 100);
+      }
+
+      setTimeout(() => {
+        mensaje2.style.display = 'block';
+      }, 2000);
+
+      setTimeout(() => {
+        mensaje3.style.display = 'block';
+      }, 4000);
+    });
+
+    function crearCorazon() {
+      const corazon = document.createElement('div');
+      corazon.classList.add('corazon');
+      corazon.textContent = '❤️';
+
+      const x = Math.random() * window.innerWidth;
+      const y = window.innerHeight;
+
+      corazon.style.left = `${x}px`;
+      corazon.style.top = `${y}px`;
+
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
